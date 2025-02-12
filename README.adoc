@@ -1,0 +1,25 @@
+= Vert.x Spring-vertx Cluster 
+
+This project is a demo of exposing Spring-hosted service beans (and therefore Spring-wired services) via vert.x
+cluster. In vert.x 3 it's perfectly possible to share an application context between multiple verticles.
+
+In this demo we can see basic configuration required for creating vert.x cluster. This cluster is dependent on hazelecast for discovery though Zookeeper can also be used.
+
+You can run it directly in your IDE by creating a run configuration that uses the main class
+`io.vertx.examples.spring.SpringExampleRunner`.
+
+The pom.xml uses the Maven shade plugin to assemble the application and all it's dependencies into a single "fat" jar.
+
+To build a "fat jar"
+
+    mvn package
+
+To run the fat jar:
+
+    java -jar target/vertx-cluster-3.2.1-fat.jar 8080
+
+(You can take that jar and run it anywhere there is a Java 8+ JDK. It contains all the dependencies it needs so you
+don't need to install Vert.x on the target machine).
+
+Now point your browser at http://localhost:8080 to see a simple welcome page, and then
+http://localhost:8080/products to see the Spring-hosted service invoked via the vertx eventbus
